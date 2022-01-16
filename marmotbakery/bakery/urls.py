@@ -1,8 +1,8 @@
-from asyncio.windows_events import NULL
+#from asyncio.windows_events import NULL
 from django.urls import path
 from . import views
-from django.conf import settings 
-from django.conf.urls.static import static 
+#from django.conf import settings 
+#from django.conf.urls.static import static 
 from django.shortcuts import render
 
 
