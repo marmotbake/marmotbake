@@ -1,8 +1,6 @@
 
-from django.template.context_processors import csrf
 from django.contrib.auth.decorators import user_passes_test
 from collections import OrderedDict
-from collections import defaultdict
 import json
 from .models import Blog, Content, User, Orders, Image
 from bakery.forms import EditForm, PlaceOrderForm, FileForm
@@ -17,7 +15,6 @@ from datetime import date, datetime, timedelta, time
 from django.db.models import Count
 from django import template
 import collections
-from types import SimpleNamespace
 
 register = template.Library()
 
