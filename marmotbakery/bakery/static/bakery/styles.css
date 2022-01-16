@@ -89,3 +89,7 @@ body {
 .breaddiv{
     width: 350px; height: auto; margin: 10px;  background: lightgray; border-radius: 10px; padding: 10px;
 } 
+
+.blogsec{
+    margin: 10px;
+}
