@@ -129,10 +129,11 @@ STATICFILES_DIRS = [
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media') # 'media' is my folder by Django convention
 #MEDIA_URL = '/media/'
-MEDIA_URL = '/home/marmotbake/bakery/media/'
+MEDIA_URL = '/home/marmotbake/marmotbake/marmotbakery/media/'
 
 context_processors = [
     'django.template.context_processors.media', # set this explicitly
     
 ]
 
+#
