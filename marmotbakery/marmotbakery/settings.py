@@ -123,8 +123,8 @@ STATIC_URL = '/static/'
 
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
-    #'/var/www/static/',
-    '/home/marmotbake/marmotbake/marmotbakery/static/'
+    '/var/www/static/',
+    #'/home/marmotbake/marmotbake/marmotbakery/static/'
 ]
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media') # 'media' is my folder by Django convention
