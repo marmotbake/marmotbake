@@ -59,7 +59,7 @@ body {
 }
 .imagediv {
     margin: 10px;
-    width: 370px;
+    width: 360px;
     padding: 10px;
     background: lightgrey;
     border-radius: 10px;
@@ -71,7 +71,8 @@ body {
     position: absolute;
     overflow: hidden;
     bottom: 15px;
-    left: 15px;
+    left: 10px;
+    right:10px;
     background: white;
     padding: 2px;
     border-radius: 5px;
