@@ -123,13 +123,17 @@ STATIC_URL = '/static/'
 
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
-    #'/var/www/static/',
-    '/home/marmotbake/marmotbake/marmotbakery/bakery/static/'
+    '/var/www/static/',
+    # in pythonanywhere web tab add:
+    # /static/
+    #/home/marmotbake/marmotbake/marmotbakery/bakery/static/
 ]
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media') # 'media' is my folder by Django convention
-#MEDIA_URL = '/media/'
-MEDIA_URL = '/home/marmotbake/marmotbake/marmotbakery/media/'
+MEDIA_URL = '/media/'
+# in pythonanywhere web tab add:
+#/media/
+#/home/marmotbake/marmotbake/marmotbakery/media/'
 
 context_processors = [
     'django.template.context_processors.media', # set this explicitly
