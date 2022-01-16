@@ -1,0 +1,122 @@
+{% load static %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    {% load static %}
+    <title>{% block title %}Marmot Bakery{% endblock %}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link href="{% static 'bakery/styles.css' %}" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+
+    <script src="{% static 'bakery/mySort.js' %}"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelector('#maintitle').addEventListener('click', ()=>{
+                
+                document.location.href = "/";
+            })
+        })
+    </script>
+
+
+</head>
+
+<body >
+    <div id="bckgr">
+        <br>
+        <br>
+    <h2 id="maintitle" style="margin-top: 0pt; margin-bottom: 0pt;">Marmot Bakery</h2>
+    <span style="color: azure;">
+        {% if user.is_authenticated %}
+        <span > Signed in as <strong>{{ user.username }}</strong>.</span>
+        {% else %}
+        <span>Not signed in.</span>
+        
+        {% endif %}
+    </span>
+</div>
+
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+
+            </div>
+
+            <div class="collapse navbar-collapse" id="myNavbar">
+                <ul class="nav navbar-nav">
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'index' %}">Our Bread</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'waitlist' %}">Waitlist</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'blog' %}">Blog</a>
+                    </li>
+
+
+                    {% if user.is_authenticated %}
+                    {% if not user.is_superuser%}
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'myorders' %}">My Orders</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'placeorder' %}">Place Order</a>
+                    </li>
+                    {%endif%}
+                    {% if user.is_superuser%}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'blogadmin' %}">Blog Admin</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'taskmanager' %}">Task Manager</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'metrics' %}">Metrics</a>
+                    </li>
+
+
+                    {% endif %}
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a class="nav-link" href="{% url 'logout' %}"><span class="glyphicon glyphicon-log-out"></span>
+                            Log Out</a>
+                    </li>
+                </ul>
+
+                {% else %}
+                </ul>
+
+
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="{% url 'register' %}"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+                    <li><a href="{% url 'login' %}"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                </ul>
+                {% endif %}
+            </div>
+    </nav>
+
+    <hr>
+    {% block body %}
+    {% endblock %}
+</body>
+
+<hr>
+<p>Marmot Bakery is final project for Harvard University CS50W. All rights reserved.</p>
+</html>

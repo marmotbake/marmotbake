@@ -1,0 +1,88 @@
+{% extends "bakery/layout.html" %}
+
+{% block body %}
+{% load static %}
+<script src="{% static 'bakery/blogadmin.js' %}"></script>
+
+
+<h2>Blog Admin</h2>
+
+<h5>You can dynamically add content and image blocks to create you blog post.</h5>
+
+<div style="justify-content: center; width: 100%; display: flex; flex-wrap: wrap;" class=" myCurrent">
+    <div style="margin: 10px;  border: 1px solid lightgray;  width: 700px;">
+        <div style="margin-bottom: 20px; padding: 10px; text-align: left    ; background: lightgray">
+            <span style="margin: 0px 0px 10px 10px;">Builder elements: </span>
+            <button class="contentbutton" style="margin: 0px 0px 10px 10px;">Add Content Block</button>
+            
+            <button  class=imagebutton style="margin: 0px 0px 10px 10px;">Add Image</button>
+        <!-- </form> -->
+        </div>
+
+        <div class="create" style="margin: 10px">
+            <p>Blog Id: <span id="blogid">{{id}}</span></p>
+            <h5>Title:</h5>
+            
+            <input id="title" type="text" style="margin-bottom: 10px; width: 100%;" value="{{title}}">
+            {% for ctnt in contents %}
+            
+            {%if ctnt.number != 0 %}
+
+            {%if '/media' in ctnt.content %}
+            <p class="number">{{ctnt.number}}</p>
+            <img src="{{MEDIA_URL}}{{ctnt.content}}" alt="{{ctnt.content}}" width="100%">
+            <br>
+            {%else%}
+            <p class="number">{{ctnt.number}}</p>
+            <textarea id={{ctnt.number}} class="contentblock" style="resize: vertical; width: 100%; margin-bottom: 10px;"> {{ctnt.content}}</textarea>
+            {%endif%}
+            
+            {%endif%}
+            
+            {% endfor %}
+
+            <div class="last" style="text-align: center; margin-top: 10px; border: 1px dashed lightgray; width: 100%;">➕</div>
+            <div style="width: 100%;">
+                <p style="display: inline-block; margin-top: 50px;">Add builder elements by sing the buttons above...</p>
+                <span style="display: inline-block; font-size: 50px;">☝🏻☝🏻☝🏻</span>
+                
+                <button disabled id="post" style="margin-top: 50px; float: right;">Post</button>
+                <button id="save" style="margin-right: 10px; margin-top: 50px; float: right;">Save</button>
+            </div>
+        </div>
+    </div>
+    <div style="margin: 10px; border: 1px solid lightgray;  width: 300px;">
+        <div style="margin-bottom: 20px; padding: 10px; text-align: center; background: lightgray">
+            <h5>My Column</h5>
+        </div>
+        <div>
+           
+            {%for key, value in allblogTitles.items %}
+            {% if forloop.counter|divisibleby:2 %}
+            <a href='blogdetails/{{key}}' class="color1">{{value}}</a>
+            {% else %}
+            <a href='blogdetails/{{key}}' class="color2">{{value}}</a>
+            {% endif %}
+            
+           
+            
+                
+                
+            {%endfor%}
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% endblock %}

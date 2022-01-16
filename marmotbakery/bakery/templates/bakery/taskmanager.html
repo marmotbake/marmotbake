@@ -1,0 +1,50 @@
+{% extends "bakery/layout.html" %}
+
+{% block body %}
+<h2>Task Manager</h2>
+
+{%for key, value in dailyTasks.items%}
+
+<h4 style="background: lightgreen; padding: 5px; border-radius: 5px;">Tasks for {{key}}</h4>
+<div style="background: lightgray; padding: 5px; border-radius: 5px;">
+<h4>Summary</h4>
+{% for dictItemKey, dictItemValue in value.summary.items%}
+
+
+        {{dictItemKey}} - {{dictItemValue}}x
+        <br>
+{%endfor%}
+</div>
+<table class="table">
+    <thead class="thead-light">
+        <th>User</th>
+        <th>Order</th>
+        <th>Quantity</th>
+        <th>Comment</th>
+    </thead>
+    <tbody>
+    
+        {% for listItem in value.orders%}
+   
+        <tr>
+            <td>
+                {{listItem.owner.username}}
+            </td>
+            <td>
+                {{listItem.breadType}}
+            </td>
+            <td>
+                {{listItem.quantity}}
+            </td>
+            <td>
+                {{listItem.comment}}
+            </td>
+        </tr>
+        
+        {%endfor%}
+    </tbody>
+</table>
+
+<br>
+{%endfor%}
+{% endblock %}

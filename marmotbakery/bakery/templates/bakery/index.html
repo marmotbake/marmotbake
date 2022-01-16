@@ -1,0 +1,71 @@
+{% extends "bakery/layout.html" %}
+
+{% block body %}
+{% load static %}
+    <h2>Нашия Хляб</h2>
+    
+    <div style="justify-content: center; width: 100%; display: flex; flex-wrap: wrap;" class=" myCurrent">
+        <div style="margin: 10px;  border: 1px solid lightgray;  width: 800px;">
+            <div style="padding: 10px; text-align: center    ; background: lightgray">
+                <h5 >Видове Хляб</h5>
+            </div>
+            <div style="justify-content: center; width: 100%; display: flex; flex-wrap: wrap;">
+                <div  onclick="location.href='bread_white'" class="imagediv">
+                    <div class="bottom-left">Бял Хляб</div>
+                    <img src="media/staticimages/IMG_2603.JPEG"/>
+                </div>
+                <div  onclick="location.href='#'" class="imagediv">
+                    <div class="bottom-left">Селски Хляб (10% ръжен)</div>
+                    <img src="media/staticimages/IMG_2888.JPEG"/>
+                </div>
+                <div  onclick="location.href='#'" class="imagediv">
+                    <div class="bottom-left">Хляб с овесени ядки (10%)</div>
+                    <img src="media/staticimages/IMG_2169.JPEG"/>
+                </div>
+                <div  onclick="location.href='#'" class="imagediv">
+                    <div class="bottom-left">Semolina Хляб</div>
+                    <img src="media/staticimages/IMG_2702.JPEG"/>
+                </div>
+                <div  onclick="location.href='#'" class="imagediv">
+                    <div class="bottom-left">Пълнозърнест (60% Ръжен)</div>
+                    <img src="media/staticimages/IMG_2698.JPEG"/>
+                </div>
+                <div  onclick="location.href='#'" class="imagediv">
+                    <div class="bottom-left">Хляб със семена</div>
+                    <img src="media/staticimages/IMG_3266.JPG"/>
+                </div>
+                <div  onclick="location.href='#'" class="imagediv">
+                    <div class="bottom-left">Багети</div>
+                    <img src="media/staticimages/IMG_3185.JPEG"/>
+                </div>
+                <div  onclick="location.href='#'" class="imagediv">
+                    <div class="bottom-left">Козунак</div>
+                    <img src="media/staticimages/IMG_2214.JPEG"/>
+                </div>
+            </div>
+        </div>
+            
+        <div style="margin: 10px; border: 1px solid lightgray;  width: 300px;">
+            <div style=" padding: 10px; text-align: center; background: lightgray">
+                <h5>My Column</h5>
+            </div>
+            <div>
+               
+                {%for key, value in allblogTitles.items %}
+                {% if forloop.counter|divisibleby:2 %}
+                <a class="color1" href='blogdetails/{{key}}' >{{value}}</a>
+                {% else %}
+                <a class="color2" href='blogdetails/{{key}}'>{{value}}</a>
+                {% endif %}
+                
+               
+                
+                    
+                    
+                {%endfor%}
+            </div>
+        </div>
+    </div>
+        
+        
+{% endblock %}

@@ -1,0 +1,44 @@
+{% extends "bakery/layout.html" %}
+
+{% block body %}
+    <h2>Waitlist</h2>
+    {{ifAccepted}}
+    <div>
+        <p>
+            Please note that we have a total daily capacity for only 10 loafs. 
+            We need 2 days in order to make your bread. You can order maximum 5 loafs per day.
+            According to the waitinglist the completion time of your order may vary.
+            Orders placed after 21:00 CET will be considered as next day orders.
+            Refer to <a href="{% url 'myorders' %}">My Orders</a> for order details and exact delivery date.
+        </p>
+        <hr>
+    </div>
+
+    <table class="table">
+    <thead class="thead-light">
+        <th>Σ</th>
+        <th>User</th>
+        <th>Bread Type</th>
+        <th>Quantity</th>
+        <th>Delivery Date</th>
+    </thead>
+    <tbody>
+        
+    {% for order in orders  %}
+    
+    <tr>
+        <td>{{order.cumulative}}</td>
+        <td>{{order.owner.username}}</td>
+        <td>{{order.breadType}}</td>
+        <td>{{order.quantity}}</td>
+        <td>{{order.deliveryTime.date}}</td>
+        
+    </tr>
+   
+   </tbody>
+
+
+    {% endfor %}
+</table>
+
+{% endblock %}

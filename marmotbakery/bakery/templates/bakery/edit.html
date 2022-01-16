@@ -1,0 +1,148 @@
+{% extends "bakery/layout.html" %}
+
+{% block body %}
+{% load custom_tags %}
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        document.querySelector('#id_breadType').addEventListener('change', function () {
+            switch (document.getElementById('id_breadType').value) {
+                case "White Bread":
+                    document.getElementById('id_price').value = "$3.50"
+                    break;
+                case "Country Bread":
+                    document.getElementById('id_price').value = "$3.90"
+                    break;
+                case "Oat Porridge Bread":
+                    document.getElementById('id_price').value = "$4.90"
+                    break;
+                case "Semolina Bread":
+                    document.getElementById('id_price').value = "$4.50"
+                    break;
+                case "100% Rye Bread":
+                    document.getElementById('id_price').value = "$6.90"
+                    break;
+                case "Focaccia":
+                    document.getElementById('id_price').value = "$5.00"
+                    break;
+                case "Toast Bread":
+                    document.getElementById('id_price').value = "$3.00"
+                    break;
+                case "Sweet Brioche":
+                    document.getElementById('id_price').value = "$9.90"
+                    break;
+
+                default:
+                    break;
+            }
+            //calculate total price on change
+            var quantity = document.getElementById('id_quantity').value
+            var price = document.getElementById('id_price').value.substring(1)
+            var totalPrice = parseFloat(quantity) * parseFloat(price).toFixed(2)
+            document.getElementById('totalPrice').innerHTML = totalPrice.toFixed(2)
+        })
+        var initialOrderCount = document.getElementById('id_quantity').value
+        var allowedAdditional = document.getElementById('allowedAdditional').value
+
+        document.getElementById('id_quantity').addEventListener('change', function () {
+            //control how much bread can be additionally ordered
+            var orderCount = document.getElementById('id_quantity').value
+            var delta = initialOrderCount - orderCount
+
+            //console.log(allowedAdditional)
+            document.getElementById('dynamicAllowed').innerHTML = parseInt(delta) + parseInt(allowedAdditional)
+            var orderCountArchive = document.getElementById('id_quantity').value - 1
+            if (document.getElementById('dynamicAllowed').innerHTML < 0) {
+                document.getElementById('dynamicAllowed').innerHTML = "0"
+                document.getElementById('id_quantity').value = orderCountArchive
+            }
+
+            //calculate total price on change
+            var quantity = document.getElementById('id_quantity').value
+            var price = document.getElementById('id_price').value.substring(1)
+            var totalPrice = parseFloat(quantity) * parseFloat(price).toFixed(2)
+            document.getElementById('totalPrice').innerHTML = totalPrice.toFixed(2)
+        })
+
+    })
+
+</script>
+
+
+<h2>Edit Your Order</h2>
+<input type="hidden" id="allowedAdditional" value={{allowedAdditional}}>
+
+<div style="width: 100%; display: flex; flex-wrap: wrap;" class=" myCurrent">
+    {% for order in orders %}
+
+    {% if order.id == id %}
+    <form action="{{order.id}}" method="post">
+        {% csrf_token %}
+    <div style="width: 300px; background: rgb(221, 228, 221); border-radius: 10px; padding: 10px; margin: 5px;">
+
+        <h3>
+            <select id="id_breadType" name="breadType">
+                {% for x, y in form.fields.breadType.choices %}
+                <option value="{{ x }}" {% if order.breadType == x %} selected {% endif %}>{{ y }}</option>
+                {% endfor %}
+            </select>
+
+        </h3>
+        <hr>
+        <div>
+            <p style="margin: 5px 0;">Quantity:
+                {{form.quantity}}
+                <span id="noMoreAcc" style="color: darkorange;"> allowable for the day: <span
+                        id="dynamicAllowed">{{allowedAdditional}}</span></span>
+            </p>
+            <p style="margin: 5px 0;">Delivery Date: {{order.deliveryTime.date}}</p>
+            <p style="margin: 5px 0;">Price per item: {{form.price}}</p>
+
+
+        </div>
+        <div>
+            <p>Total Price: $<span id="totalPrice">{{order.price|removeDollar | multiply:order.quantity }}</span></p>
+        </div>
+        <hr>
+
+        <div>
+
+            <input style="margin-top: 10px;" type="submit" value="Save"> | <a id=c{{order.id}} href="{% url 'myorders' %}">Cancel</a> | <a
+                id=d{{order.id}} href="/delete/{{order.pk}}">Delete</a>
+
+        </div>
+
+    </div>
+    </form>
+    {% else %}
+    <div
+        style="opacity: 0.4; width: 300px; background: rgb(221, 228, 221); border-radius: 10px; padding: 10px; margin: 5px;">
+
+        <h3>{{order.breadType}}</h3>
+        <hr>
+        <div>
+            <p style="margin: 5px 0;">Quantity: {{order.quantity}}</p>
+            <p style="margin: 5px 0;">Delivery Date: {{order.deliveryTime.date}}</p>
+            <p style="margin: 5px 0;">Price per item: {{order.price}}</p>
+
+
+        </div>
+        <div>
+            <p>Total Price: ${{order.price|removeDollar | multiply:order.quantity}}</p>
+        </div>
+        <hr>
+
+        <div>
+
+            <a id=e{{order.id}} href="{{order.pk}}">Edit</a> | <a id=d{{order.id}} href="/delete/{{order.pk}}">Delete</a>
+
+        </div>
+
+    </div>
+    {% endif%}
+
+
+    {% endfor %}
+
+
+
+    {% endblock %}

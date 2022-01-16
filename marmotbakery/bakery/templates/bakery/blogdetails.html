@@ -1,0 +1,29 @@
+{% extends "bakery/layout.html" %}
+
+{% block body %}
+{% load static %}
+{% load custom_tags %}
+
+<!-- {{blog|first}} -->
+
+{% for item in blog%}
+
+{%if item == blog|first%}
+<h2>{{item.content}}</h2>
+<hr>
+{%else%}
+
+{%if '/media' in item.content %}
+<img src="{{MEDIA_URL}}{{item.content}}" alt="{{item.content}}" width="100%">
+{%else%}
+<p>{{item.content|markdown|safe}}</p>
+{%endif%}
+<br>
+{%endif%}
+
+
+
+{%endfor%}
+
+
+{% endblock %}

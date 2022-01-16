@@ -1,0 +1,208 @@
+{% extends "bakery/layout.html" %}
+
+
+{% block body %}
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+
+        // metrics
+        // chart data for total orders
+        var maxId = [];
+        var pMetrics = document.querySelectorAll(".myMetricsP");
+        //get bread with max count
+        pMetrics.forEach(function (item) { maxId.push(item.id); })
+        var maxWidth = Math.max.apply(Math, maxId);
+        console.log(maxWidth)
+        //iterate over all p and change width
+        //max width is 50%
+        pMetrics.forEach(function (item) {
+            var pWidth = 100 * item.id / maxWidth;
+
+            item.style.width = pWidth + "%";
+        })
+        // chart data for current month
+        // chart data for total orders
+        var maxId = [];
+        var pMetrics = document.querySelectorAll(".myMetricsC");
+        //get bread with max count
+        pMetrics.forEach(function (item) { maxId.push(item.id); })
+        var maxWidth = Math.max.apply(Math, maxId);
+        console.log(maxWidth)
+        //iterate over all p and change width
+        //max width is 50%
+        pMetrics.forEach(function (item) {
+            var pWidth = 100 * item.id / maxWidth;
+
+            item.style.width = pWidth + "%";
+        })
+        //
+
+        //
+        // implement the delete user function
+        // when the delete button is pressed, dynamically to be created a confirmation window
+        //
+        var deleteDiv = document.createElement('div');
+        deleteDiv.id = "divCentered";
+        var pText = document.createElement('p');
+        deleteDiv.appendChild(pText);
+        var bDiv = document.createElement('div');
+        deleteDiv.appendChild(bDiv);
+        bDiv.style.verticalAlign = "bottom";
+        deleteDiv.setAttribute('style', 'padding: 10px; border-radius: 20px;position: fixed;top: 50%;left: 50%;transform: translate(-50%, -50%); width: 50%; height: 20%;background: orange;')
+        deleteDiv.style.display = "none";
+        //create buttons
+        var cancelButton = document.createElement('button');
+        cancelButton.innerText = "Cancel"
+        var deleteButton = document.createElement('button');
+        deleteButton.innerText = "Delete"
+        bDiv.appendChild(cancelButton);
+        bDiv.appendChild(deleteButton);
+        pText.style.textAlign = "center";
+        bDiv.style.textAlign = "center";
+        deleteButton.style.margin = "10px";
+        // add the newly created element and its content into the DOM
+        document.body.appendChild(deleteDiv);
+
+        document.querySelectorAll(".deleteUser").forEach(user => {
+            user.addEventListener('click', () => {
+                deleteDiv.style.display = "block";
+                var id = user.id.split('?!&')[1];
+                var username = user.id.split('?!&')[0];
+                pText.innerHTML = `Are you sure you want to permanently delete user ${username.toUpperCase()}?`;
+
+                //
+                //implement Cancel function
+                cancelButton.onclick = () => { deleteDiv.style.display = "none"; }
+
+                //
+                //implement Delete function
+
+                deleteButton.onclick = () => {
+                    fetch(`/deleteuser/${id}`, {
+                        headers: {
+                            'Accept': 'application/json',
+                            'X-Requested-With': 'XMLHttpRequest',
+                            "X-CSRFToken": getCookie("csrftoken")
+                        },
+                        method: "POST",
+
+                    }).then(function () {
+                        deleteDiv.style.display = "none";
+                        row = document.getElementById(`row${id}`)
+                        row.parentNode.removeChild(row);
+
+                    })
+                }
+
+            })
+        })
+        // function getCookie
+        // taken from stackoverflow
+        // url: https://stackoverflow.com/questions/10730362/get-cookie-by-name
+        //
+        function getCookie(name) {
+            var cookieValue = null;
+            if (document.cookie && document.cookie !== '') {
+                var cookies = document.cookie.split(';');
+                for (var i = 0; i < cookies.length; i++) {
+                    var cookie = jQuery.trim(cookies[i]);
+                    // Does this cookie string begin with the name we want?
+                    if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                        break;
+                    }
+                }
+            }
+            return cookieValue;
+        }
+
+    })// end of DOMContentLoaded
+</script>
+
+<h2>Metrics</h2>
+
+<div style="width: 100%; display: flex; flex-wrap: wrap;" class=" myCurrent">
+    <div style="border: 1px solid lightgray;  width: 500px;">
+        <div style="margin-bottom: 20px; padding: 10px; text-align: center; background: lightgray">
+            <h5>User Metrics</h5>
+        </div>
+
+        <table class="table table-striped" id="mySort">
+
+            <tr>
+                <th>
+                    <span>User</span><span style="float: right;">Delete</span>
+
+                </th>
+                <th onclick="sortTable(1)" style="text-align: center;">
+                    Orders <span style="color: green;"> &#x21c5;</span>
+                </th>
+                <th onclick="sortTable(2)" style="text-align: center;">
+                    Cancellations <span style="color: green;"> &#x21c5;</span>
+                </th>
+                <!-- <th>Actions</th> -->
+            </tr>
+
+            {%for key, value in users.items%}
+            <tr id="row{{key.id}}">
+                <td>
+                    <span> {{key.username}} </span>
+
+                    <a class="deleteUser" id="{{key.username}}?!&{{key.id}}" href="#" style="float: right;"> ❌</a>
+                </td>
+                {% for item in value%}
+                <td style="text-align: center;">
+                    {{item}}
+                </td>
+                {%endfor%}
+                <!-- <td>
+                    TODO
+                </td> -->
+            </tr>
+            {%endfor%}
+        </table>
+
+
+    </div>
+
+    <div style="border: 1px solid lightgray;  width: 500px;">
+        <div style="margin-bottom: 20px; padding: 10px; text-align: center; background: lightgray">
+            <h5>Order Metrics</h5>
+        </div>
+
+        <div class="mySummary" style="margin: 10px;">
+            <h4>Orders for {{currentMonth}}</h4>
+
+            {% for key, value in currentOrders.items %}
+
+            <div id=myMetrics>
+                <p class="myMetricsC" id="{{value}}"><span>{{key}}: </span> <span class="myMetricsS"
+                        style="float: right;">{{value}} </span></p>
+            </div>
+            {% endfor %}
+            <hr>
+
+            <h4 style="margin-top: 20px;">Total Orders</h4>
+
+            {% for key, value in thisOrders.items %}
+
+            <div id=myMetrics>
+                <p class="myMetricsP" id="{{value}}"><span>{{key}}: </span> <span class="myMetricsS"
+                        style="float: right;">{{value}} </span></p>
+            </div>
+            {% endfor %}
+
+
+        </div>
+
+
+
+    </div>
+
+</div>
+
+
+
+
+
+{% endblock %}

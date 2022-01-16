@@ -1,0 +1,50 @@
+{% extends "bakery/layout.html" %}
+
+{% block body %}
+{% load static %}
+{% load custom_tags %}
+<h2>Blog</h2>
+{{test}}
+<div  style="width: 100%; justify-content: center; display: flex; flex-wrap: wrap;" class=" myCurrent">
+{% for key, value in blog.items %}
+<section class="blogsec">
+    {% if request.user.is_superuser %}
+    <a href="editblog/{{key}}" style="margin: 5px; cursor: pointer; ">Edit</a>
+    |
+    <a href="deleteblog/{{key}}" style="margin: 5px; cursor: pointer;">Delete</a>
+{% endif %}
+<div class="blogdiv" onclick="location.href='blogdetails/{{key}}';">
+<span>Blog Id: {{key}}</span> 
+
+<br>
+<h3>{{value.first.content}}</h3>
+<hr>
+<div style="display: inline-block;  width: 110px;border-right: 1px solid black; ">
+{%for content in value%}
+    {% if content.isTitleImage  %}
+    
+       <img src="{{MEDIA_URL}}{{content.content}}" alt="{{content.content}}" width="100px;"> 
+        
+    {%endif%}
+   
+{%endfor%}
+</div>
+
+<div style="width: 200px; display: inline-block; padding-left: 10px; vertical-align: top;">
+{%for content in value%}
+    
+    {% if '/media' not in content.content  and content.number == 1 %}
+    
+    {{content.content|slice:":150"|markdown|safe}} ...
+  
+    {%endif%}
+ 
+{%endfor%}
+</div>
+</div>
+
+<br>
+</section>
+{% endfor %}
+</div>
+{% endblock %}
