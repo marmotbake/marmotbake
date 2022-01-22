@@ -28,7 +28,8 @@ urlpatterns = [
     path("deleteblog/<int:blogid>", views.deleteblog, name="deleteblog"),
     path("editblog/<int:blogid>", views.editblog, name="editblog"),
     
-    path('bread_white', lambda request: render(request, 'bakery/bread_white.html'))
+    path('bread_white', lambda request: render(request, 'bakery/bread_white.html')),
+    path('bread_country', lambda request: render(request, 'bakery/bread_country.html')),
 
 ] #+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
