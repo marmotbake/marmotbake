@@ -155,8 +155,9 @@ def placeorder(request):
             
             #check if no orders longer than 2 days and zero
             #
-            if Orders.objects.all().latest('deliveryTime').deliveryTime.date() + timedelta(2) < datetime.now().date():
-                cumuTemp=0
+            if Orders.objects.all().count() != 0:
+                if Orders.objects.all().latest('deliveryTime').deliveryTime.date() + timedelta(2) < datetime.now().date():
+                    cumuTemp=0
             
 
             order = Orders.objects.create(
