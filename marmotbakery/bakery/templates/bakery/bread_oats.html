@@ -1,0 +1,102 @@
+{% extends "bakery/layout.html" %}
+
+{% block body %}
+{% load static %}
+{% load custom_tags %}
+<h2>Хляб с Овесени Ядки - 850г.</h2>
+
+<div  style="width: 100%; justify-content: center; display: flex; flex-wrap: wrap;" class=" myCurrent">
+
+<div class="breaddiv">
+
+<br>
+<h4>Съставки:</h4>
+<hr>
+
+<div style="display: inline-block; padding-left: 10px; vertical-align: top;">
+    <p>• 90% бяло брашно (без ензими)</p>
+    <p>• 10% овесени ядки</p>
+    <p>• Вода</p>
+    <p>• Сол</p>
+    <p>• Натурален квас (брашно и вода)</p>
+   
+</div>
+</div>
+
+<div class="breaddiv">
+
+    <br>
+    <h4>Хранителни Стойности:</h4>
+    <hr>
+    
+    <div style="display: inline-block; padding-left: 10px; vertical-align: top;">
+        <table class="table table-bordered table-dark">
+            <thead class="thead-light">
+                <tr>
+                    <th>
+                        Хранителна Стойност
+                    </th>
+                    <th>
+                        на 100 грама
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        Енергийна стойност
+                    </td>
+                    <td>
+                        222 kcal
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Въглехидрати
+                    </td>
+                    <td>
+                        43 г.
+                    </td>
+                    <tr>
+                        <td>
+                            Протеини
+                        </td>
+                        <td>
+                            8.5 г.
+                        </td>
+                        <tr>
+                            <td>
+                                Мазнини
+                            </td>
+                            <td>
+                                1 г.
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Сол
+                            </td>
+                            <td>
+                                1.2 г.
+                            </td>
+                        </tr>
+                        
+                    </tr>
+                </tr>
+
+            </tbody>
+
+        </table>
+       
+    </div>
+       
+    
+    
+    </div>
+
+
+</div>
+
+<a href="{% url 'index' %}">Обратно</a>
+
+{% endblock %}
