@@ -73,10 +73,10 @@
                     {% if not user.is_superuser%}
 
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'myorders' %}">My Orders</a>
+                        <a class="nav-link" href="{% url 'myorders' %}">Моите Поръчки</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'placeorder' %}">Place Order</a>
+                        <a class="nav-link" href="{% url 'placeorder' %}">Направи поръчка</a>
                     </li>
                     {%endif%}
                     {% if user.is_superuser%}
@@ -96,7 +96,7 @@
                 <ul class="nav navbar-nav navbar-right">
                     <li>
                         <a class="nav-link" href="{% url 'logout' %}"><span class="glyphicon glyphicon-log-out"></span>
-                            Log Out</a>
+                            Изход</a>
                     </li>
                 </ul>
 

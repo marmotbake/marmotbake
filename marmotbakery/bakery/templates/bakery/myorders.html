@@ -55,33 +55,33 @@
     })
 </script>
 
-<h2>My Current Orders</h2>
-<p>You can edit or delete orders. However please note that once your order is processed it cannot be changed any more.
-    The reason for this is that processed orders are calculated in the daily sourdough quantity and deleting them would
-    mean that food is going to be wasted. </p>
+<h2>Моите Поръчки</h2>
+<p>Можете да променяте или триете поръчки. Имайте предвид обаче, че след като квасът за Вашата поръчка бъде приготвен, не можете да я променяте или отказвате повече.
+    Причината е, че всеки хляб се приготвя ръчно, единствено за Вас, и отказ на поръчка би означавал изхвърляне на хранителни продукти.
+Поръчки, които не можете да променяте, ще бъдат маркирани с "Прави се". </p>
 <div style="width: 100%; display: flex; flex-wrap: wrap;" class=" myCurrent">
     {%if not orders%}
-    <h4 style="background: orange; padding: 10px;">You currently don't have any orders.</h4>
+    <h4 style="background: orange; padding: 10px;">В момента нямате поръчки.</h4>
     {%endif%}
     {% for order in orders %}
     <div style="width: 300px; background: rgb(221, 228, 221); border-radius: 10px; padding: 10px; margin: 5px;">
         <h3>{{order.breadType}}</h3>
         <hr>
         <div>
-            <p style="margin: 5px 0;">Quantity: {{order.quantity}}</p>
-            <p style="margin: 5px 0;">Delivery Date: <span class="date"
+            <p style="margin: 5px 0;">Количество: {{order.quantity}}</p>
+            <p style="margin: 5px 0;">Готов на: <span class="date"
                     id="date_{{order.id}}">{{order.deliveryTime.date}}</span></p>
-            <p style="margin: 5px 0;">Price per item: {{order.price}}</p>
+            <p style="margin: 5px 0;">Единична цена: {{order.price}}</p>
 
 
         </div>
         <div>
-            <p>Total Price: ${{order.price|removeDollar | multiply:order.quantity }}</p>
+            <p>Обща цена: ${{order.price|removeDollar | multiply:order.quantity }}</p>
         </div>
         <hr>
         <div>
-            <a id=e{{order.id}} href="edit/{{order.pk}}">Edit</a> | <a id=d{{order.id}}
-                href="delete/{{order.pk}}">Delete</a>
+            <a id=e{{order.id}} href="edit/{{order.pk}}">Промени</a> | <a id=d{{order.id}}
+                href="delete/{{order.pk}}">Изтрий</a>
                 <span id=processed{{order.id}}></span>
         </div>
 
@@ -95,10 +95,16 @@
 
 
 <div class="myHistory">
-    <h2>Order History</h2>
-    Hello, {{user}}! Your most ordered bread is {{mostOrdered}}.
+    <h2>История на Вашите поръчки</h2>
+    Здравейте, {{user}}! Най-често поръчваният от Вас хляб е 
+    {% if mostOrdered.count == 0 %}
+        {{mostOrdered}}.
+        {%else%}
+        "няма данни".
+    {%endif%}
+    
     <div class="mySummary">
-        <h4>Your Metrics</h4>
+        <h4>Вашите метрики</h4>
         {% for key, value in summaryByType %}
 
         <div id=myMetrics>
@@ -114,18 +120,17 @@
 </div>
 <table class="table">
     <thead class="thead-light">
-        <th>Delivery Date</th>
-        <th>Bread Type</th>
-        <th>Quantity</th>
-        <th>Price per Bread</th>
+        <th>Готов на</th>
+        <th>Вид Хляб</th>
+        <th>Количество</th>
+        <th>Единична Цена</th>
 
-        <th>Total Price</th>
+        <th>Обща Цена</th>
     </thead>
     <tbody>
         {% if ordersHistory.count == 0%}
         <tr>
-            <td colspan="5">Currently there are no orders in the history. Data will be available here once your orders
-                are delivered. </td>
+            <td colspan="5">В момента нямате поръчки в историята. Информацията в този раздел ще се обнови автоматично, когато имате готов хляб. </td>
         </tr>
         {% endif %}
 

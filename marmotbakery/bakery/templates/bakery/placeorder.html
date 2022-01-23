@@ -91,30 +91,30 @@
 
 </script>
 {{test}}
-<h2>Place Your Order</h2>
+<h2>Направи поръчка</h2>
 <br>
 <form action="{% url 'placeorder' %}" method="post">
     {% csrf_token %}
     <div style="width: 100%; display: flex; flex-wrap: wrap;" class=" myCurrent">
         <div style="border: 1px solid lightgray;  width: 500px;">
             <div style="margin-bottom: 20px; padding: 10px; text-align: center; background: lightgray">
-                <h6>Order Details</h6>
+                <h6>Данни за поръчката</h6>
             </div>
             <table style="margin-right: auto; margin-left: auto;">
                 <tr>
                     <td>
-                        <p style="float: right;">Bread Type: {{form.breadType}}</p>
+                        <p style="float: right;">Вид хляб: {{form.breadType}}</p>
                     </td>
                     <td>
-                        <p style="float: right;">Price: {{form.price}}</p>
+                        <p style="float: right;">Цена: {{form.price}}</p>
                     </td>
                     <td>
-                        <p>Quantity: {{form.quantity}}</p>
+                        <p>Количество: {{form.quantity}}</p>
                     </td>
                 </tr>
                 <tr>
                     <td colspan="2">
-                        <p style="float: right;">Total Price: </p>
+                        <p style="float: right;">Обща цена: </p>
                     </td>
                     <td>
                         <p style="text-align: center;" id="totalPrice"></p>
@@ -122,15 +122,15 @@
                 </tr>
                 <tr>
                     <td colspan="3">
-                        <p>Leave your feedback here:</p>
+                        <p>Вашата обратна връзка:</p>
                         <p>{{form.comment}}</p>
                     </td>
                 </tr>
                 <tr>
                     <td colspan="3">
-                        <p id="countInfo1">You can order <span id="maxDailyLeft"
+                        <p id="countInfo1">Можете да поръчате <span id="maxDailyLeft"
                                 style="border-radius: 10px;  padding: 10px; background: rgb(187, 233, 173);">{{maxDailyLeft}}</span>
-                            breads until our daily capacity is reached.</p>
+                            хляба преди достигане на дневния ни лимит.</p>
                         <p id="countInfo2"></p>
                     </td>
                 </tr>
@@ -143,49 +143,49 @@
         <div style="border: 1px solid lightgray; width: 500px;">
 
             <div style="margin-bottom: 20px; padding: 10px; text-align: center; background: lightgray">
-                <h6>Shipping Details</h6>
+                <h6>Вашите данни</h6>
             </div>
             <table style="margin-right: auto; margin-left: auto;">
                 <tr>
                     <td>
-                        <p style="float: right;">First Name: {{form.firstName}}</p>
+                        <p style="float: right;">Име: {{form.firstName}}</p>
                     </td>
                 </tr>
                 <tr>
                     <td>
-                        <p style="float: right;">Last Name: {{form.lastName}}</p>
+                        <p style="float: right;">Фамилия: {{form.lastName}}</p>
                     </td>
                 </tr>
                 <tr>
                     <td>
-                        <p style="float: right;">City: {{form.city}}</p>
+                        <p style="float: right;">Град: {{form.city}}</p>
                     </td>
                 </tr>
                 <tr>
                     <td>
-                        <p style="float: right;">Postal Code: {{form.postCode}}</p>
+                        <p style="float: right;">Пощенски код: {{form.postCode}}</p>
                     </td>
                 </tr>
                 <tr>
                     <td>
-                        <p style="float: right;">Address Line 1: {{form.addressL1}}</p>
+                        <p style="float: right;">Адрес 1: {{form.addressL1}}</p>
                     </td>
                 </tr>
                 <tr>
                     <td>
-                        <p style="float: right;">Address Line 2: {{form.addressL2}}</p>
+                        <p style="float: right;">Адрес 2: {{form.addressL2}}</p>
                     </td>
                 </tr>
                 <tr>
                     <td>
-                        <p style="float: right;">Telephone Number: {{form.tel}}</p>
+                        <p style="float: right;">Тел Номер: {{form.tel}}</p>
                     </td>
                 </tr>
             </table>
 
         </div>
     </div>
-    <input style="margin-top: 10px;" type="submit" value="Order Now">
+    <input style="margin-top: 10px;" type="submit" value="Поръчай">
 
 
 </form>
