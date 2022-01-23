@@ -31,6 +31,8 @@ urlpatterns = [
     path('bread_white', lambda request: render(request, 'bakery/bread_white.html')),
     path('bread_country', lambda request: render(request, 'bakery/bread_country.html')),
     path('bread_oats', lambda request: render(request, 'bakery/bread_oats.html')),
+    path('bread_semolina', lambda request: render(request, 'bakery/bread_semolina.html')),
+    path('bread_wholeweed', lambda request: render(request, 'bakery/bread_wholeweed.html')),
 
 ] #+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

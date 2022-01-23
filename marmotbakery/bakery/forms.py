@@ -28,7 +28,7 @@ class PlaceOrderForm(forms.Form):
     tel = forms.IntegerField(label='Telephone Number', max_value=9999999999, required=True)
     comment = forms.CharField(label='Comment', max_length=256, required=False)
     #price = forms.FloatField(required=True, widget=forms.TextInput(attrs={'placeholder': '$3.5', 'size': 3, 'readonly': True}))
-    price = forms.CharField(required=True, widget=forms.TextInput(attrs={'placeholder': '$3.5', 'size': 3, 'readonly': True}))
+    price = forms.CharField(required=True, widget=forms.TextInput(attrs={'placeholder': '$3.5', 'size': 4, 'readonly': True}))
     
     
 class EditForm(forms.Form):
