@@ -5,14 +5,14 @@ from django.db.models.fields import URLField
 
 
 breadType = (
-        ('White Bread', 'White Bread'),
-        ('Country Bread', 'Country Bread'),
-        ('Oat Porridge Bread', 'Oat Porridge Bread'),
-        ('Semolina Bread', 'Semolina Bread'),
-        ('100% Rye Bread', '100% Rye Bread'),
-        ('Seeded', 'Seeded'),
-        ('Baguette', 'Baguette'),
-        ('Sweet Brioche', 'Sweet Brioche')
+        ('Бял Хляб', 'Бял Хляб'),
+        ('Селски Хляб', 'Селски Хляб'),
+        ('Хляб с Овесени Ядки', 'Хляб с Овесени Ядки'),
+        ('Хляб Семолина', 'Хляб Семолина'),
+        ('Пълнозърнест 100%', 'Пълнозърнест 100%'),
+        ('Хляб със Семена', 'Хляб със Семена'),
+        ('Багети 3х', 'Багети 3х'),
+        ('Козунак', 'Козунак')
     )
 
 

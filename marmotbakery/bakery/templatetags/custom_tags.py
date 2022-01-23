@@ -13,7 +13,7 @@ def multiply(value, arg):
 @register.filter()
 def removeDollar(value):
     
-    return float( value[1:])
+    return float( value)
 
 @register.filter()
 def procent(value, maxValue):

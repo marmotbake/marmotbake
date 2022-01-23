@@ -5,32 +5,32 @@
     document.addEventListener('DOMContentLoaded', function () {
 
         //default value for price
-        document.getElementById('id_price').value = "$3.50"
+        document.getElementById('id_price').value = "3.50"
         document.querySelector('#id_breadType').addEventListener('change', function () {
             switch (document.getElementById('id_breadType').value) {
-                case "White Bread":
-                    document.getElementById('id_price').value = "$3.50"
+                case "Бял Хляб":
+                    document.getElementById('id_price').value = "3.50"
                     break;
-                case "Country Bread":
-                    document.getElementById('id_price').value = "$3.90"
+                case "Селски Хляб":
+                    document.getElementById('id_price').value = "3.90"
                     break;
-                case "Oat Porridge Bread":
-                    document.getElementById('id_price').value = "$4.90"
+                case "Хляб с Овесени Ядки":
+                    document.getElementById('id_price').value = "3.90"
                     break;
-                case "Semolina Bread":
-                    document.getElementById('id_price').value = "$4.50"
+                case "Хляб Семолина":
+                    document.getElementById('id_price').value = "4.50"
                     break;
-                case "100% Rye Bread":
-                    document.getElementById('id_price').value = "$6.90"
+                case "Пълнозърнест 100%":
+                    document.getElementById('id_price').value = "5.90"
                     break;
-                case "Focaccia":
-                    document.getElementById('id_price').value = "$5.00"
+                case "Хляб със Семена":
+                    document.getElementById('id_price').value = "3.90"
                     break;
-                case "Toast Bread":
-                    document.getElementById('id_price').value = "$3.00"
+                case "Багети 3х":
+                    document.getElementById('id_price').value = "4.90"
                     break;
-                case "Sweet Brioche":
-                    document.getElementById('id_price').value = "$9.90"
+                case "Козунак":
+                    document.getElementById('id_price').value = "9.90"
                     break;
 
                 default:
@@ -42,13 +42,13 @@
         document.getElementById('id_breadType').addEventListener('change', function () {
             var print = calcTotalPrice()
             console.log(print)
-            document.getElementById('totalPrice').innerHTML = "$ " + print
+            document.getElementById('totalPrice').innerHTML = print
         })
         var maxDailyLeft = document.getElementById('maxDailyLeft').innerHTML
         document.getElementById('id_quantity').addEventListener('change', function () {
             //calculate final price
             var print = calcTotalPrice()
-            document.getElementById('totalPrice').innerHTML = "$ " + print
+            document.getElementById('totalPrice').innerHTML = print
             //update how any breads can be ordered until capacity is reached
             var orderCount = document.getElementById('id_quantity').value
 
@@ -73,10 +73,10 @@
 
     function calcTotalPrice() {
         if (document.getElementById('id_price').value == '') {
-            var cleanedPrice = document.getElementById('id_price').placeholder.substring(1)
+            var cleanedPrice = document.getElementById('id_price').placeholder
         }
         else {
-            var cleanedPrice = document.getElementById('id_price').value.substring(1)
+            var cleanedPrice = document.getElementById('id_price').value
         }
 
         var quantity = document.getElementById('id_quantity').value
@@ -109,7 +109,7 @@
                         <p style="float: right;">Цена: {{form.price}}</p>
                     </td>
                     <td>
-                        <p>Количество: {{form.quantity}}</p>
+                        <p>Брой: {{form.quantity}}</p>
                     </td>
                 </tr>
                 <tr>
