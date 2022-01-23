@@ -1,15 +1,23 @@
 {% extends "bakery/layout.html" %}
 
 {% block body %}
-    <h2>Waitlist</h2>
+    <h2>Как да поръчам</h2>
     {{ifAccepted}}
     <div>
         <p>
-            Please note that we have a total daily capacity for only 10 loafs. 
-            We need 2 days in order to make your bread. You can order maximum 5 loafs per day.
-            According to the waitinglist the completion time of your order may vary.
-            Orders placed after 21:00 CET will be considered as next day orders.
-            Refer to <a href="{% url 'myorders' %}">My Orders</a> for order details and exact delivery date.
+            Моля, имайте предвид, че имаме дневен капацитет от само 10 хляба. 
+            Трябват ни два дни, за да направим Вашия хляб - от замесването на тестото - до печенето. Можете да поръчате до 5 хляба дневно.
+            В зависимост от списъка с чакащи поръчки (виж по-долу), времето за изработка на Вашия хляб може да е повече от два дни.
+            Поръчки след 21:00ч ще бъдат автоматично прехвърлени за седващия ден.
+            Проверете меню 
+            {% if user.is_authenticated %}
+            <a href="{% url 'myorders' %}">
+            Моите Поръчки</a>
+            {%else%}
+            <a href="{% url 'login' %}">
+            Моите Поръчки</a>
+                {%endif%}
+            за подробна информация относно точен ден, в който Вашият хляб ще бъде готов.
         </p>
         <hr>
     </div>
@@ -17,14 +25,25 @@
     <table class="table">
     <thead class="thead-light">
         <th>Σ</th>
-        <th>User</th>
-        <th>Bread Type</th>
-        <th>Quantity</th>
-        <th>Delivery Date</th>
+        <th>Потребител</th>
+        <th>Вид Хляб</th>
+        <th>Количество</th>
+        <th>Ще бъде готов на</th>
     </thead>
     <tbody>
+    {% if orders.count == 0 %}
+    <tr> 
+        <td colspan="5">
+           В момента няма чакащи поръчки. 
+        </td>   
         
+    </tr>
+    
+    {%endif%}
     {% for order in orders  %}
+    
+    
+        
     
     <tr>
         <td>{{order.cumulative}}</td>
