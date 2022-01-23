@@ -240,8 +240,9 @@ def placeorder(request):
 
 def waitlist(request):
     totalCount = Orders.objects.aggregate(Sum('quantity'))['quantity__sum']
-    lastDeliveryDate = Orders.objects.order_by(
-        "-id").values("deliveryTime").first()["deliveryTime"].date()
+    if Orders.objects.all().count() != 0:
+        lastDeliveryDate = Orders.objects.order_by(
+            "-id").values("deliveryTime").first()["deliveryTime"].date()
     # test case if a bread should be acepted
     # placed in this section just to check results in the template
     # ifAccepted = False
